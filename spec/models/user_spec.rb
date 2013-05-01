@@ -32,6 +32,14 @@ describe User do
 	it { should respond_to(:admin) }
 	it { should respond_to(:authenticate) }
 
+	describe "accessible attributes" do
+	    it "should not allow access to admin" do
+	      expect do
+	        User.new(admin: true)
+	      end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+	    end    
+	  end
+
 	describe "with admin attribute set to 'true'" do
 	  before do
 	    @user.save!
